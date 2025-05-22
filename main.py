@@ -1,13 +1,7 @@
-from db import KochORM, RezeptORM, ZutatORM
-from sqlalchemy.orm import Session
+from container import Student
 
-kochi = KochORM(
-    name="Hans",
-    alter=74,
-    rezepte=[RezeptORM(gericht="Bolognese", zutaten=[ZutatORM(name="Spaghetti")])],
-)
 
-with Session() as session:
+studenten = Student.get_all()
 
-    session.add(kochi)
-    session.commit()
+for stu in studenten:
+    print(dir(stu))
