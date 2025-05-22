@@ -27,8 +27,3 @@ class Zutat:
     @classmethod
     def get_by_id(cls):
         pass
-
-
-if __name__ == "__main__":
-    zutat = Zutat(name="Fisch")
-    zutat.save_to_db()

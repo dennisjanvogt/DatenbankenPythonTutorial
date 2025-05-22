@@ -29,8 +29,11 @@ class RezeptORM(Base):
     __tablename__ = "rezept"
     id: Mapped[int] = mapped_column(primary_key=True)
     gericht: Mapped[str] = mapped_column(String(100))
-    user_id: Mapped[int] = mapped_column(ForeignKey("koch.id"))
-    user: Mapped["KochORM"] = relationship(back_populates="rezepte")
+    zutaten: Mapped[List["ZutatORM"]] = relationship(
+        back_populates="rezept", cascade="all, delete-orphan"
+    )
+    koch_id: Mapped[int] = mapped_column(ForeignKey("koch.id"))
+    koch: Mapped["KochORM"] = relationship(back_populates="rezepte")
 
     def __repr__(self) -> str:
         return f"Rezept(id={self.id!r}, gericht={self.gericht!r})"
