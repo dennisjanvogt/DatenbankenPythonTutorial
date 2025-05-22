@@ -1,6 +1,13 @@
-from container.zutat import Zutat
-import db
+from db import KochORM, RezeptORM, ZutatORM
+from sqlalchemy.orm import Session
 
+kochi = KochORM(
+    name="Hans",
+    alter=74,
+    rezepte=[RezeptORM(gericht="Bolognese", zutaten=[ZutatORM(name="Spaghetti")])],
+)
 
-zutat = Zutat(name="Fisch")
-zutat.save_to_db()
+with Session() as session:
+
+    session.add(kochi)
+    session.commit()
